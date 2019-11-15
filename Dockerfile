@@ -1,4 +1,4 @@
-FROM pristtlt/lnp-base:7.2.19-fpm-stretch AS installer
+FROM pristtlt/lnp-base:7.2-fpm-stretch AS installer
 
 ARG GIT_USER
 ARG GIT_TOKEN
@@ -22,7 +22,7 @@ COPY . .
 RUN composer install
 
 # build image
-FROM pristtlt/lnp-base:7.2.19-fpm-stretch  AS build
+FROM pristtlt/lnp-base:7.2-fpm-stretch  AS build
 
 COPY . .
 
