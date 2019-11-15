@@ -1,0 +1,21 @@
+if: branch =~ ^master$|^ci$
+language: bash
+services: docker
+
+install:
+    - echo "skip"
+
+script: |-
+    docker build -t php-docker-demo:v1 \
+      --build-arg GIT_USER=${GIT_USER} \
+      --build-arg GIT_TOKEN=${GIT_TOKEN} \
+      .
+
+after_script:
+    - docker images
+
+#deploy:
+#- provider: script
+#  script: >- 
+#   docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
+#   && docker push $image
