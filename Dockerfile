@@ -12,7 +12,9 @@ ENV GIT_USER=${GIT_USER} \
 
 
 # confirm initialize script run complete
-RUN cat ~/.gitconfig
+# unnecessary in process
+RUN bash /script/token-init.sh \ 
+    && cat ~/.gitconfig
 
 COPY . .
 
