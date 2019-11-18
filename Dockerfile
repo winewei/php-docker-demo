@@ -1,30 +1,19 @@
-FROM pristtlt/lnp-base:7.2-fpm-stretch AS installer
-
+FROM alpine
 ARG GIT_USER
 ARG GIT_TOKEN
 ARG GIT_HOST_SCHEME
 ARG GIT_HOST
 
-ENV GIT_USER=$GIT_USER 
-ENV GIT_TOKEN=$GIT_TOKEN 
+ENV GIT_USER=$GIT_USER
+ENV GIT_TOKEN=$GIT_TOKEN
 ENV GIT_HOST=$GIT_HOST
 ENV GIT_HOST_SCHEME=$GIT_HOST_SCHEME
 
+RUN echo ${GIT_USER} >> /a.txt \
+    && echo ${GIT_TOKEN} >> /a.txt \
+	&& echo ${GIT_HOST} >> /a.txt \
+	&& echo ${GIT_HOST_SCHEME} >> /a.txt 
 
-# confirm initialize script run complete
-# unnecessary in process
+RUN cat /a.txt
+
 RUN printenv
-RUN cat /scripts/token-init.sh 
-RUN bash /scripts/token-init.sh 
-RUN cat ~/.gitconfig
-
-COPY . .
-
-RUN composer install
-
-# build image
-FROM pristtlt/lnp-base:7.2-fpm-stretch  AS build
-
-COPY . .
-
-RUN composer install --no-dev --no-progress -o 
