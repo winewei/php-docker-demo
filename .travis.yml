@@ -7,10 +7,6 @@ install:
 
 script: |-
     docker build -t php-docker-demo:v1 \
-      --build-arg GIT_USER="$GIT_USER" \
-      --build-arg GIT_TOKEN="$GIT_TOKEN" \
-      --build-arg GIT_HOST="$GIT_HOST" \
-      --build-arg GIT_HOST_SCHEME="$GIT_HOST_SCHEME" \
       .
 
 after_script:
